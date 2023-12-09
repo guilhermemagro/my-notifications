@@ -81,3 +81,36 @@ That's it for Android classes that is supported by Hilt.
 If you wonder what about classes not supported by Hilt (ex: `ContentProvider`)?!
 I recommend learning how from this tutorial @EntryPoint annotation on codelab (also don't forget to 
 check the documentation for how to Inject dependencies in classes not supported by Hilt).
+
+
+---
+https://stackoverflow.com/a/49181208/11407290
+---
+
+If you're working with Android 7.0+, WhatsApp uses MessageStyle Expanded Notifications.
+Here - https://developer.android.com/training/notify-user/expanded.html#message-style
+
+To retrieve all 5 messages from a notification like
+
+> MyFriend (5 messages)
+> testt
+
+Do this:
+```java
+    Bundle extras = mysbn.getNotification().extras;
+    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)){
+    Parcelable b[] = (Parcelable[]) extras.get(Notification.EXTRA_MESSAGES);
+    
+            if(b != null){
+                content = "";
+                for (Parcelable tmp : b){
+    
+                    Bundle msgBundle = (Bundle) tmp;
+                    content = content + msgBundle.getString("text") + "\n";
+    
+                    /*Set<String> io = msgBundle.keySet(); // To get the keys available for this bundle*/
+    
+                }
+            }
+        }
+```
