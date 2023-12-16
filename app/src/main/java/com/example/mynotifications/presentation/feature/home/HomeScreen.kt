@@ -59,8 +59,10 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         title = title,
                         message = message,
-                        packageName = packageName,
-                        postTime = postTime.toString(),
+                        appName = appName,
+                        postTime = formattedPostTime,
+                        iconRes = iconRes,
+                        context = context
                     )
                 }
             }

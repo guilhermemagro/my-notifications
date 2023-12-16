@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e7c2d1a430f94f4b82c49ed7549ad076",
+    "identityHash": "c57773d19f99518fe8a01a317cedb5fa",
     "entities": [
       {
         "tableName": "NotificationItem",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `message` TEXT NOT NULL, `packageName` TEXT NOT NULL, `postTime` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `message` TEXT NOT NULL, `packageName` TEXT NOT NULL, `postTime` INTEGER NOT NULL, `iconRes` INTEGER)",
         "fields": [
           {
             "fieldPath": "uid",
@@ -37,6 +37,12 @@
             "columnName": "postTime",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "iconRes",
+            "columnName": "iconRes",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -52,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e7c2d1a430f94f4b82c49ed7549ad076')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c57773d19f99518fe8a01a317cedb5fa')"
     ]
   }
 }

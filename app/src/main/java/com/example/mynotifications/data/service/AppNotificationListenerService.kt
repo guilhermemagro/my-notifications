@@ -69,7 +69,7 @@ class AppNotificationListenerService : NotificationListenerService() {
                 message = text,
                 packageName = packageName,
                 postTime = postTime,
-                drawableIcon = icon
+                iconRes = icon
             )
             if (notificationItem != lastNotification) {
                 scope.launch {
