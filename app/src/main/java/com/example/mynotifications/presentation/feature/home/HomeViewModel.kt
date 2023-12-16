@@ -9,5 +9,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
-
+    val notifications = notificationRepository.getAllNotifications()
 }
