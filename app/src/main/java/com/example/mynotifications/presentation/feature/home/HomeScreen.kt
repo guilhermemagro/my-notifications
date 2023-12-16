@@ -1,5 +1,6 @@
 package com.example.mynotifications.presentation.feature.home
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,13 +24,17 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotifications.presentation.component.NotificationItemView
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
+private const val NOTIFICATION_LISTENER_SETTINGS =
+    "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
+private const val NOTIFICATION_BUTTON_TEXT = "Open Notifications Listener settings"
+
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel()
 ) {
     val notifications by viewModel.notifications.collectAsState(initial = emptyList())
-    val intent = Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
+    val intent = Intent(NOTIFICATION_LISTENER_SETTINGS)
     val context = LocalContext.current
 
     Surface(
@@ -43,9 +48,9 @@ fun HomeScreen(
         ) {
             item {
                 Button(
-                    onClick = { startActivity(context, intent, null) }
+                    onClick = { openNotificationListenerSettings(context, intent) }
                 ) {
-                    Text(text = "Open Notifications Listener settings")
+                    Text(text = NOTIFICATION_BUTTON_TEXT)
                 }
             }
             items(notifications) { notification ->
@@ -61,6 +66,10 @@ fun HomeScreen(
             }
         }
     }
+}
+
+private fun openNotificationListenerSettings(context: Context, intent: Intent) {
+    startActivity(context, intent, null)
 }
 
 @Preview(showBackground = true)
