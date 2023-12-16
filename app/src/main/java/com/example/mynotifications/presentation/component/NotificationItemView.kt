@@ -1,6 +1,6 @@
 package com.example.mynotifications.presentation.component
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,10 +10,14 @@ fun NotificationItemView(
     modifier: Modifier = Modifier,
     title: String = "",
     message: String = "",
+    packageName: String = "",
+    postTime: String = "",
 ) {
-    Column {
+    Card(modifier = modifier) {
         // TODO - Add icon image
         Text(text = title)
         Text(text = message)
+        Text(text = packageName)
+        Text(text = postTime)
     }
 }

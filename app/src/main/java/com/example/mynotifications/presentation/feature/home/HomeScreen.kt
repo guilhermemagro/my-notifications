@@ -1,6 +1,9 @@
 package com.example.mynotifications.presentation.feature.home
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -10,11 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotifications.presentation.component.NotificationItemView
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
-
-// TODO - (?) How to get Hilt component in a Compose View?
 
 @Composable
 fun HomeScreen(
@@ -27,12 +29,21 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        LazyColumn {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             items(notifications) { notification ->
-                NotificationItemView(
-                    title = notification.title,
-                    message = notification.message
-                )
+                with(notification) {
+                    NotificationItemView(
+                        modifier = Modifier.fillMaxWidth(),
+                        title = title,
+                        message = message,
+                        packageName = packageName,
+                        postTime = postTime.toString(),
+                    )
+                }
             }
         }
     }
