@@ -3,6 +3,7 @@ package com.example.mynotifications.presentation.component
 import android.content.Context
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,12 +22,16 @@ fun NotificationItemView(
     iconRes: Int? = null,
     context: Context? = null,
 ) {
-    Card(modifier = modifier.padding(8.dp)) {
+    Card(modifier = modifier) {
         Row {
             iconRes?.let { res ->
                 val iconBitmap = context?.getBitmapFromOrNull(res, appName)
                 iconBitmap?.let { bitmap ->
-                    Icon(bitmap = bitmap, contentDescription = null)
+                    Icon(
+                        modifier = Modifier.size(20.dp),
+                        bitmap = bitmap,
+                        contentDescription = null
+                    )
                 }
             }
             Text(text = appName)
