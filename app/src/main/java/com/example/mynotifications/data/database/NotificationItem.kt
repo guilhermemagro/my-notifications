@@ -14,7 +14,6 @@ private val knownApplications = mapOf(
     "com.whatsapp" to "WhatsApp",
 )
 
-// TODO - Get formatted postTime
 @Entity
 data class NotificationItem(
     @PrimaryKey(autoGenerate = true) val uid: Int,
