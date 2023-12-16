@@ -37,9 +37,11 @@ class AppNotificationListenerService : NotificationListenerService() {
 
         val sbnExtrasBundle = sbn?.notification?.extras
         val notification = sbn?.notification
+        val icon = notification?.smallIcon?.resId
         val packageName = sbn?.packageName
         val postTime = sbn?.postTime
-        sbnExtrasBundle?.let { tryToInsertNotification(it, packageName, postTime) }
+
+        tryToInsertNotification(sbnExtrasBundle, packageName, postTime, icon)
 
         Log.d("MyNotifications", "extras = " + bundleToString(sbnExtrasBundle))
         Log.d(
@@ -51,7 +53,8 @@ class AppNotificationListenerService : NotificationListenerService() {
     private fun tryToInsertNotification(
         extrasBundle: Bundle?,
         packageName: String?,
-        postTime: Long?
+        postTime: Long?,
+        icon: Int?,
     ) {
         val title = extrasBundle?.getString(TITLE_KEY)
         val text = extrasBundle?.getString(TEXT_KEY)
@@ -65,7 +68,8 @@ class AppNotificationListenerService : NotificationListenerService() {
                 title = title,
                 message = text,
                 packageName = packageName,
-                postTime = postTime
+                postTime = postTime,
+                drawableIcon = icon
             )
             if (notificationItem != lastNotification) {
                 scope.launch {
@@ -88,7 +92,7 @@ class AppNotificationListenerService : NotificationListenerService() {
         )
     }
 
-    fun bundleToString(bundle: Bundle?): String? {
+    private fun bundleToString(bundle: Bundle?): String? {
         if (bundle == null) {
             return null
         }

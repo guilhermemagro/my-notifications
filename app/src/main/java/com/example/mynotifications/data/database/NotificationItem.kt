@@ -1,5 +1,6 @@
 package com.example.mynotifications.data.database
 
+import androidx.annotation.DrawableRes
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlin.math.abs
@@ -14,13 +15,15 @@ data class NotificationItem(
     val message: String,
     val packageName: String,
     val postTime: Long,
+    val drawableIcon: Int?,
 ) {
     constructor(
         title: String,
         message: String,
         packageName: String,
-        postTime: Long
-    ) : this(0, title, message, packageName, postTime)
+        postTime: Long,
+        drawableIcon: Int?,
+    ) : this(0, title, message, packageName, postTime, drawableIcon)
 
     override fun equals(other: Any?): Boolean {
         return ((other != null)
@@ -29,6 +32,7 @@ data class NotificationItem(
                 && (other.message == message)
                 && (other.packageName == packageName))
                 && (abs(other.postTime - postTime) < oneSecond)
+                && (other.drawableIcon == drawableIcon)
     }
 
     override fun hashCode(): Int {
@@ -37,6 +41,7 @@ data class NotificationItem(
         result = 31 * result + message.hashCode()
         result = 31 * result + packageName.hashCode()
         result = 31 * result + postTime.hashCode()
+        result = 31 * result + (drawableIcon ?: 0)
         return result
     }
 }
