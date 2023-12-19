@@ -2,6 +2,7 @@ package com.example.mynotifications.presentation.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mynotifications.data.database.NotificationItem
 import com.example.mynotifications.data.repository.NotificationRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,6 +17,12 @@ class HomeViewModel @Inject constructor(
     fun deleteAllNotifications() {
         viewModelScope.launch {
             repository.deleteAll()
+        }
+    }
+
+    fun deleteNotification(notification: NotificationItem) {
+        viewModelScope.launch {
+            repository.delete(notification)
         }
     }
 }

@@ -2,7 +2,6 @@ package com.example.mynotifications.presentation.feature.home
 
 import android.content.Context
 import android.content.Intent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,6 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mynotifications.presentation.component.DismissibleNotificationItemView
 import com.example.mynotifications.presentation.component.NotificationItemView
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
@@ -65,14 +65,15 @@ fun HomeScreen(
             }
             items(notifications) { notification ->
                 with(notification) {
-                    NotificationItemView(
+                    DismissibleNotificationItemView(
                         modifier = Modifier.fillMaxWidth(),
                         title = title,
                         message = message,
                         appName = appName,
                         postTime = formattedPostTime,
                         iconRes = iconRes,
-                        context = context
+                        context = context,
+                        onDeleteNotification = { viewModel.deleteNotification(this) },
                     )
                 }
             }
