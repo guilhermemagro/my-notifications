@@ -16,5 +16,8 @@ interface NotificationDao {
     suspend fun insert(notificationItem: NotificationItem)
 
     @Delete
-    fun delete(notificationItem: NotificationItem)
+    suspend fun delete(notificationItem: NotificationItem)
+
+    @Query("DELETE FROM notificationitem")
+    suspend fun deleteAll()
 }

@@ -2,7 +2,9 @@ package com.example.mynotifications.presentation.feature.home
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +29,7 @@ import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 private const val NOTIFICATION_LISTENER_SETTINGS =
     "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS"
 private const val NOTIFICATION_BUTTON_TEXT = "Open Notifications Listener settings"
+private const val DELETE_BUTTON_TEXT = "Delete all notifications"
 
 @Composable
 fun HomeScreen(
@@ -47,10 +50,17 @@ fun HomeScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             item {
-                Button(
-                    onClick = { openNotificationListenerSettings(context, intent) }
-                ) {
-                    Text(text = NOTIFICATION_BUTTON_TEXT)
+                Column {
+                    Button(
+                        onClick = { openNotificationListenerSettings(context, intent) }
+                    ) {
+                        Text(text = NOTIFICATION_BUTTON_TEXT)
+                    }
+                    Button(
+                        onClick = viewModel::deleteAllNotifications
+                    ) {
+                        Text(text = DELETE_BUTTON_TEXT)
+                    }
                 }
             }
             items(notifications) { notification ->

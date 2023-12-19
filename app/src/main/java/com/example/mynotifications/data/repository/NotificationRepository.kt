@@ -10,6 +10,7 @@ interface NotificationRepository {
     fun getAllNotifications(): Flow<List<NotificationItem>>
     suspend fun insert(notificationItem: NotificationItem)
     suspend fun delete(notificationItem: NotificationItem)
+    suspend fun deleteAll()
 }
 
 @Singleton
@@ -26,5 +27,9 @@ class NotificationRepositoryImpl @Inject constructor(
 
     override suspend fun delete(notificationItem: NotificationItem) {
         notificationDao.delete(notificationItem)
+    }
+
+    override suspend fun deleteAll() {
+        notificationDao.deleteAll()
     }
 }
