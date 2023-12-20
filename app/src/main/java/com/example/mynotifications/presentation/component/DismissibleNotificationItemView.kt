@@ -34,6 +34,7 @@ fun DismissibleNotificationItemView(
     appName: String = "",
     postTime: String = "",
     iconRes: Int? = null,
+    category: String = "",
     context: Context? = null,
     onDeleteNotification: (() -> (Unit))? = null,
 ) {
@@ -59,6 +60,7 @@ fun DismissibleNotificationItemView(
                 appName = appName,
                 postTime = postTime,
                 iconRes = iconRes,
+                category = category,
                 context = context,
             )
         }

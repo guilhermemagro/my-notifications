@@ -31,6 +31,7 @@ fun NotificationItemView(
     message: String = "",
     appName: String = "",
     postTime: String = "",
+    category: String = "",
     iconRes: Int? = null,
     context: Context? = null,
 ) {
@@ -64,6 +65,8 @@ fun NotificationItemView(
         Spacer(modifier = Modifier.height(4.dp))
         Text(text = title, fontWeight = W500, style = MaterialTheme.typography.bodySmall)
         Text(text = message, style = MaterialTheme.typography.bodySmall)
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(text = category, style = MaterialTheme.typography.bodySmall)
     }
 }
 

@@ -22,6 +22,7 @@ data class NotificationItem(
     val packageName: String,
     val postTime: Long,
     val iconRes: Int?,
+    val category: String,
 ) {
     @Ignore
     val appName = knownApplications.getOrDefault(packageName, packageName)
@@ -35,7 +36,8 @@ data class NotificationItem(
         packageName: String,
         postTime: Long,
         iconRes: Int?,
-    ) : this(0, title, message, packageName, postTime, iconRes)
+        category: String,
+    ) : this(0, title, message, packageName, postTime, iconRes, category)
 
     override fun equals(other: Any?): Boolean {
         return ((other != null)

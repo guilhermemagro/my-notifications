@@ -76,6 +76,7 @@ fun HomeScreen(
                         appName = appName,
                         postTime = formattedPostTime,
                         iconRes = iconRes,
+                        category = category,
                         context = context,
                         onDeleteNotification = { viewModel.deleteNotification(this) },
                     )
