@@ -2,6 +2,7 @@ package com.example.mynotifications.presentation.feature.home
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotifications.presentation.component.DismissibleNotificationItemView
-import com.example.mynotifications.presentation.component.NotificationItemView
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
 private const val NOTIFICATION_LISTENER_SETTINGS =
@@ -31,6 +31,7 @@ private const val NOTIFICATION_LISTENER_SETTINGS =
 private const val NOTIFICATION_BUTTON_TEXT = "Open Notifications Listener settings"
 private const val DELETE_BUTTON_TEXT = "Delete all notifications"
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -63,10 +64,13 @@ fun HomeScreen(
                     }
                 }
             }
-            items(notifications) { notification ->
+            items(
+                items = notifications,
+                key = { item -> item.uid }
+            ) { notification ->
                 with(notification) {
                     DismissibleNotificationItemView(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().animateItemPlacement(),
                         title = title,
                         message = message,
                         appName = appName,
