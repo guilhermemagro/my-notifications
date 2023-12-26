@@ -45,7 +45,7 @@ class AppNotificationListenerService : NotificationListenerService() {
         val category = notification?.category
 
         if (Notification.CATEGORY_SYSTEM != category) {
-            tryToInsertNotification(sbnExtrasBundle, packageName, postTime, icon, category.orEmpty())
+            tryToInsertNotification(sbnExtrasBundle, packageName, postTime, icon)
         }
 
         Log.d(LOG_TAG, "extras = " + bundleToString(sbnExtrasBundle))
@@ -59,8 +59,7 @@ class AppNotificationListenerService : NotificationListenerService() {
         extrasBundle: Bundle?,
         packageName: String?,
         postTime: Long?,
-        icon: Int?,
-        category: String,
+        icon: Int?
     ) {
         val title = extrasBundle?.getString(TITLE_KEY)
         val text = extrasBundle?.getString(TEXT_KEY)
@@ -75,8 +74,7 @@ class AppNotificationListenerService : NotificationListenerService() {
                 message = text,
                 packageName = packageName,
                 postTime = postTime,
-                iconRes = icon,
-                category = category,
+                iconRes = icon
             )
             if (notificationItem != lastNotification) {
                 scope.launch {
