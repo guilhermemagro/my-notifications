@@ -1,5 +1,6 @@
 package com.example.mynotifications.data.service
 
+import android.app.Notification
 import android.os.Bundle
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 private const val TITLE_KEY = "android.title"
 private const val TEXT_KEY = "android.text"
+private const val LOG_TAG = "MyNotifications"
 
 @AndroidEntryPoint
 class AppNotificationListenerService : NotificationListenerService() {
@@ -42,11 +44,13 @@ class AppNotificationListenerService : NotificationListenerService() {
         val postTime = sbn?.postTime
         val category = notification?.category
 
-        tryToInsertNotification(sbnExtrasBundle, packageName, postTime, icon, category.orEmpty())
+        if (Notification.CATEGORY_SYSTEM != category) {
+            tryToInsertNotification(sbnExtrasBundle, packageName, postTime, icon, category.orEmpty())
+        }
 
-        Log.d("MyNotifications", "extras = " + bundleToString(sbnExtrasBundle))
+        Log.d(LOG_TAG, "extras = " + bundleToString(sbnExtrasBundle))
         Log.d(
-            "MyNotifications",
+            LOG_TAG,
             "onNotificationPosted: Notification = $notification | PackageName = $packageName"
         )
     }
@@ -90,7 +94,7 @@ class AppNotificationListenerService : NotificationListenerService() {
         val packageName = sbn?.packageName
 
         Log.d(
-            "MyNotifications",
+            LOG_TAG,
             "onNotificationRemoved: Notification = $notification | PackageName = $packageName"
         )
     }
