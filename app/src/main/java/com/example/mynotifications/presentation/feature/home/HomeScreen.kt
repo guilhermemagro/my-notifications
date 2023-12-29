@@ -67,7 +67,7 @@ fun HomeScreen(
             }
             notificationsCategories.forEach { category ->
                 stickyHeader {
-                    NotificationItemHeader(title = category.date)
+                    NotificationItemHeader(title = category.name)
                 }
                 items(
                     items = category.notifications,

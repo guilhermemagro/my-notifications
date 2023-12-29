@@ -19,7 +19,7 @@ class HomeViewModel @Inject constructor(
             .groupBy { it.formattedDate }
             .map {
                 NotificationCategory(
-                    date = it.key,
+                    name = it.key,
                     notifications = it.value
                 )
             }

@@ -16,11 +16,11 @@ fun NotificationItemHeader(
     title: String,
     modifier: Modifier = Modifier,
 ) {
-    val lineColor = MaterialTheme.colorScheme.onBackground
+    val lineColor = MaterialTheme.colorScheme.outline
 
     Text(
         text = title,
-        style = MaterialTheme.typography.headlineMedium,
+        style = MaterialTheme.typography.bodySmall,
         modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
@@ -33,6 +33,6 @@ fun NotificationItemHeader(
 @Composable
 fun NotificationItemHeaderPreview() {
     MaterialTheme {
-        NotificationItemHeader(title = "29/12/2023")
+        NotificationItemHeader(title = "Wednesday, 29 dez 2023")
     }
 }
