@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mynotifications.presentation.component.DismissibleNotificationItemView
+import com.example.mynotifications.presentation.component.NotificationItemHeader
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
 private const val NOTIFICATION_LISTENER_SETTINGS =
@@ -37,7 +38,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel()
 ) {
-    val notifications by viewModel.notifications.collectAsState(initial = emptyList())
+    val notificationsCategories by viewModel.notificationCategories.collectAsState(initial = emptyList())
     val intent = Intent(NOTIFICATION_LISTENER_SETTINGS)
     val context = LocalContext.current
 
@@ -64,21 +65,26 @@ fun HomeScreen(
                     }
                 }
             }
-            items(
-                items = notifications,
-                key = { item -> item.uid }
-            ) { notification ->
-                with(notification) {
-                    DismissibleNotificationItemView(
-                        modifier = Modifier.fillMaxWidth().animateItemPlacement(),
-                        title = title,
-                        message = message,
-                        appName = appName,
-                        postTime = formattedPostTime,
-                        iconRes = iconRes,
-                        context = context,
-                        onDeleteNotification = { viewModel.deleteNotification(this) },
-                    )
+            notificationsCategories.forEach { category ->
+                stickyHeader {
+                    NotificationItemHeader(title = category.date)
+                }
+                items(
+                    items = category.notifications,
+                    key = { item -> item.uid }
+                ) { notification ->
+                    with(notification) {
+                        DismissibleNotificationItemView(
+                            modifier = Modifier.fillMaxWidth().animateItemPlacement(),
+                            title = title,
+                            message = message,
+                            appName = appName,
+                            postTime = formattedHour,
+                            iconRes = iconRes,
+                            context = context,
+                            onDeleteNotification = { viewModel.deleteNotification(this) },
+                        )
+                    }
                 }
             }
         }

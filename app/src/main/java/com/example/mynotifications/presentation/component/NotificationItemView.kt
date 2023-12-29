@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.mynotifications.presentation.annotations.ThemePreviews
 import com.example.mynotifications.presentation.extensions.getBitmapFromOrNull
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
@@ -34,7 +35,7 @@ fun NotificationItemView(
     iconRes: Int? = null,
     context: Context? = null,
 ) {
-    Column (
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .background(
@@ -57,17 +58,34 @@ fun NotificationItemView(
                     )
                 }
             }
-            Text(text = appName, style = MaterialTheme.typography.bodySmall)
+            Text(
+                text = appName,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodySmall
+            )
             Spacer(modifier = Modifier.weight(1f))
-            Text(text = postTime, style = MaterialTheme.typography.bodySmall)
+            Text(
+                text = postTime,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodySmall
+            )
         }
         Spacer(modifier = Modifier.height(4.dp))
-        Text(text = title, fontWeight = W500, style = MaterialTheme.typography.bodySmall)
-        Text(text = message, style = MaterialTheme.typography.bodySmall)
+        Text(
+            text = title,
+            fontWeight = W500,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodySmall
+        )
+        Text(
+            text = message,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
 fun NotificationItemViewPreview() {
     MyNotificationsTheme {
@@ -75,7 +93,7 @@ fun NotificationItemViewPreview() {
             title = "Titulo teste",
             message = "Mensagem teste teste brown fox",
             appName = "Instagram",
-            postTime = "10/10/2024 - 15:30:20",
+            postTime = "15:30:20",
         )
     }
 }

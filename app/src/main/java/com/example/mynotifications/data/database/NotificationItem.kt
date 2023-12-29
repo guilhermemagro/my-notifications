@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.mynotifications.data.extensions.toFormattedDate
+import com.example.mynotifications.data.extensions.toFormattedHour
 import kotlin.math.abs
 import kotlin.time.Duration.Companion.seconds
 
@@ -27,7 +28,10 @@ data class NotificationItem(
     val appName = knownApplications.getOrDefault(packageName, packageName)
 
     @Ignore
-    val formattedPostTime = postTime.toFormattedDate()
+    val formattedDate = postTime.toFormattedDate()
+
+    @Ignore
+    val formattedHour = postTime.toFormattedHour()
 
     constructor(
         title: String,
