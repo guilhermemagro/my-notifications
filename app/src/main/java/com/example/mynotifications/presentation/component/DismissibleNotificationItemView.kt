@@ -9,13 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.DismissDirection
-import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SwipeToDismiss
-import androidx.compose.material3.rememberDismissState
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,32 +36,31 @@ fun DismissibleNotificationItemView(
     context: Context? = null,
     onDeleteNotification: (() -> (Unit))? = null,
 ) {
-    val dismissState = rememberDismissState(
+    val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = {
-            if (it == DismissValue.DismissedToStart) {
+            if (it == SwipeToDismissBoxValue.EndToStart) {
                 onDeleteNotification?.invoke()
             }
             true
         }
     )
 
-    SwipeToDismiss(
+    SwipeToDismissBox(
         modifier = modifier,
         state = dismissState,
-        directions = setOf(DismissDirection.EndToStart),
-        background = { SwipeBackground() },
-        dismissContent = {
-            NotificationItemView(
-                modifier = Modifier.fillMaxSize(),
-                title = title,
-                message = message,
-                appName = appName,
-                postTime = postTime,
-                iconRes = iconRes,
-                context = context,
-            )
-        }
-    )
+        enableDismissFromStartToEnd = false,
+        backgroundContent = { SwipeBackground() },
+    ) {
+        NotificationItemView(
+            modifier = Modifier.fillMaxSize(),
+            title = title,
+            message = message,
+            appName = appName,
+            postTime = postTime,
+            iconRes = iconRes,
+            context = context,
+        )
+    }
 }
 
 @Composable

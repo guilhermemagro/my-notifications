@@ -99,7 +99,7 @@ fun HomeScreen(
                                 DismissibleNotificationItemView(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .animateItemPlacement(),
+                                        .animateItem(),
                                     title = title,
                                     message = message,
                                     appName = appName,
