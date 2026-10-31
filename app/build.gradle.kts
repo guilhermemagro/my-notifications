@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ApplicationExtension
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -6,7 +8,7 @@ plugins {
     id("com.google.dagger.hilt.android")
 }
 
-android {
+configure<ApplicationExtension>  {
     namespace = "com.example.mynotifications"
     compileSdk = 37
 
