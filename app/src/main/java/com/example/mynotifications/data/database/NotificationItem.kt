@@ -1,19 +1,11 @@
 package com.example.mynotifications.data.database
 
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.example.mynotifications.data.extensions.toFormattedDate
-import com.example.mynotifications.data.extensions.toFormattedHour
 import kotlin.math.abs
 import kotlin.time.Duration.Companion.seconds
 
 private val oneSecond = 1.seconds.inWholeMilliseconds
-
-private val knownApplications = mapOf(
-    "com.instagram.android" to "Instagram",
-    "com.whatsapp" to "WhatsApp",
-)
 
 @Entity
 data class NotificationItem(
@@ -24,15 +16,6 @@ data class NotificationItem(
     val postTime: Long,
     val iconRes: Int?,
 ) {
-    @Ignore
-    val appName = knownApplications.getOrDefault(packageName, packageName)
-
-    @Ignore
-    val formattedDate = postTime.toFormattedDate()
-
-    @Ignore
-    val formattedHour = postTime.toFormattedHour()
-
     constructor(
         title: String,
         message: String,

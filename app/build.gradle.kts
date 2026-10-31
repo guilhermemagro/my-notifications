@@ -83,7 +83,26 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-runtime:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-paging:$room_version")
     testImplementation("androidx.room:room-testing:$room_version")
+    androidTestImplementation("androidx.room:room-testing:$room_version")
+
+    // Paging
+    val paging_version = "3.3.5"
+    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
+    implementation("androidx.paging:paging-compose:$paging_version")
+    testImplementation("androidx.paging:paging-testing:$paging_version")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    androidTestImplementation("androidx.paging:paging-testing:$paging_version")
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+
+    // WorkManager (+ Hilt integration)
+    val work_version = "2.11.2"
+    val androidx_hilt_version = "1.3.0"
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+    implementation("androidx.hilt:hilt-work:$androidx_hilt_version")
+    kapt("androidx.hilt:hilt-compiler:$androidx_hilt_version")
+    androidTestImplementation("androidx.work:work-testing:$work_version")
 
     // ViewModel Compose
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")

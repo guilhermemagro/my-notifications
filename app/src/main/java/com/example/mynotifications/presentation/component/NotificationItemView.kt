@@ -16,12 +16,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mynotifications.presentation.annotations.ThemePreviews
-import com.example.mynotifications.presentation.extensions.getBitmapFromOrNull
+import com.example.mynotifications.presentation.icon.rememberAppIcon
 import com.example.mynotifications.presentation.theme.MyNotificationsTheme
 
 @Composable
@@ -30,10 +31,13 @@ fun NotificationItemView(
     title: String = "",
     message: String = "",
     appName: String = "",
+    packageName: String = "",
     postTime: String = "",
     iconRes: Int? = null,
     context: Context? = null,
 ) {
+    val iconBitmap by rememberAppIcon(context, packageName, iconRes)
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -45,17 +49,14 @@ fun NotificationItemView(
             .padding(8.dp)
     ) {
         Row {
-            iconRes?.let { res ->
-                val iconBitmap = context?.getBitmapFromOrNull(res, appName)
-                iconBitmap?.let { bitmap ->
-                    Icon(
-                        modifier = Modifier
-                            .size(20.dp)
-                            .padding(end = 4.dp),
-                        bitmap = bitmap,
-                        contentDescription = null
-                    )
-                }
+            iconBitmap?.let { bitmap ->
+                Icon(
+                    modifier = Modifier
+                        .size(20.dp)
+                        .padding(end = 4.dp),
+                    bitmap = bitmap,
+                    contentDescription = null
+                )
             }
             Text(
                 text = appName,
